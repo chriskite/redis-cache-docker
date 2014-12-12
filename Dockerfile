@@ -43,11 +43,10 @@ RUN buildDeps='gcc libc6-dev make'; \
   && sed -i 's/^\(save .*\)$/# \1/' /etc/redis/redis.conf
 
 RUN mkdir /data && chown redis:redis /data
-VOLUME /data
 WORKDIR /data
 
 COPY docker-entrypoint.sh /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
 
 EXPOSE 6379
-CMD [ "redis-server" ]
+CMD [ "redis-server", "/etc/redis/redis.conf" ]
